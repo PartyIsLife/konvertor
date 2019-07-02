@@ -1,33 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
+<style>
+
+    .otd{
+        border: 1px solid darkgrey;
+        height:  19px;
+        width:  171px;
+        margin-left: 5px;
+        margin-top: 20px;
+        display: inline-block;
+
+    }
+</style>
 <body>
 
 
-<select id="spisok">
-
-</select>
-
-
+<div id="1" style="display: inline-block;">
+    <input class="vvod" id="vvod1">
+</div>
+<div id="2" class="otd">.</div>
+<select id="spisok"></select>
+<button onclick="knv()">Конвертировать</button>
 </body>
 <script>
     list = ['AED','AFN','ALL','AMD','ANG','AOA','ARS','AUD','AWG','AZN','BAM','BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTC', 'BTN', 'BWP', 'BYR', 'BZD', 'CAD', 'CDF', 'CHF', 'CLF', 'CLP', 'CNY', 'COP', 'CRC', 'CUC', 'CUP', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ERN', 'ETB', 'EUR', 'FJD', 'FKP', 'GBP', 'GEL', 'GGP', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'IMP', 'INR', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD', 'JOD', 'JPY', 'KES', 'KGS', 'KHR', 'KMF', 'KPW', 'KRW', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LTL', 'LVL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRO', 'MUR', 'MVR', 'MWK', 'MXN', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NOK', 'NPR', 'NZD', 'OMR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR', 'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 'SEK', 'SGD', 'SHP', 'SLL', 'SOS', 'SRD', 'STD', 'SVC', 'SYP', 'SZL', 'THB', 'TJS', 'TMT', 'TND', 'TOP', 'TRY', 'TTD', 'TWD', 'TZS', 'UAH', 'UGX', 'USD', 'UYU', 'UZS', 'VEF', 'VND', 'VUV', 'WST', 'XAF', 'XAG', 'XAU', 'XCD', 'XDR', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMK', 'ZMW', 'ZWL'];
 
+    let a =[];
     async function kurs() {
         let key = '1a0062fdf3bc9e300ce57135dc4d42da';
-        let a = await fetch('http://www.apilayer.net/api/live?access_key=' + key + '&format=1')
+        a = await fetch('http://www.apilayer.net/api/live?access_key=' + key + '&format=1')
         a = await a.json();
-        console.log(a)
+        console.log(a);
+
+
 
     }
     kurs ();
-    let options = ''
+    let options = '';
     for (i = 0; i<list.length; i++){
         options += '<option value="' + list[i] + '">' + list[i] + '</option>'
     }
     document.getElementById('spisok').innerHTML = options;
+
+
+    function knv() {
+      let z ='USD' + document.getElementById('spisok').value;
+      m = a['quotes'][z];
+      console.log(m);
+      let x = document.getElementById('vvod1').value ;
+
+      document.getElementById('2').innerHTML = x / m ;
+
+
+    }
+
+
+
+
+
+
+
+
 </script>
 </html>
